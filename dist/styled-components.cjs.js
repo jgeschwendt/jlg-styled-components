@@ -156,7 +156,7 @@ var Theme = {
     xl: 1200
   },
   colors: {
-    red: "red"
+    red: 'red'
   }
 };
 var ThemeContext = React__default.createContext(void 0);
@@ -314,73 +314,217 @@ function _templateObject$3() {
 
   return data;
 }
-// const extractCss = (props: SpacerProps) => {
-//   const cssProps = [];
-//   if (props.m) {
-//   }
-//   return cssProps;
-// }
 var Spacer = styled__default.div(_templateObject$3(), function (props) {
   var cssProps = [];
 
   if (props.m) {
-    if (Array.isArray(props.m)) {
-      var _props$m = _slicedToArray(props.m, 2),
-          m = _props$m[0],
-          breakpoints = _props$m[1];
+    var _ref = Array.isArray(props.m) ? props.m : [props.m, {}],
+        _ref2 = _slicedToArray(_ref, 2),
+        m = _ref2[0],
+        mBreakpoints = _ref2[1];
 
+    if (m) {
       cssProps.push(styled.css(["margin:", ";"], m));
-      Object.keys(breakpoints).forEach(function (breakpoint) {
-        cssProps.push(media.breakpoint.up(breakpoint, styled.css(["margin:", ";"], breakpoints[breakpoint])));
-      });
-    } else {
-      cssProps.push(styled.css(["margin:", ";"], props.m));
     }
+
+    Object.keys(mBreakpoints).forEach(function (breakpoint) {
+      cssProps.push(media.breakpoint.up(breakpoint, styled.css(["margin:", ";"], mBreakpoints[breakpoint])));
+    });
   }
 
   if (props.mb) {
-    if (Array.isArray(props.mb)) {
-      var _props$mb = _slicedToArray(props.mb, 2),
-          mb = _props$mb[0],
-          _breakpoints = _props$mb[1];
+    var _ref3 = Array.isArray(props.mb) ? props.mb : [props.mb, {}],
+        _ref4 = _slicedToArray(_ref3, 2),
+        mb = _ref4[0],
+        mbBreakpoints = _ref4[1];
 
+    if (mb) {
       cssProps.push(styled.css(["margin-bottom:", ";"], mb));
-      Object.keys(_breakpoints).forEach(function (breakpoint) {
-        cssProps.push(media.breakpoint.up(breakpoint, styled.css(["margin-bottom:", ";"], _breakpoints[breakpoint])));
-      });
-    } else {
-      cssProps.push(styled.css(["margin-bottom:", ";"], props.mb));
     }
+
+    Object.keys(mbBreakpoints).forEach(function (breakpoint) {
+      cssProps.push(media.breakpoint.up(breakpoint, styled.css(["margin-bottom:", ";"], mbBreakpoints[breakpoint])));
+    });
+  }
+
+  if (props.ml) {
+    var _ref5 = Array.isArray(props.ml) ? props.ml : [props.ml, {}],
+        _ref6 = _slicedToArray(_ref5, 2),
+        ml = _ref6[0],
+        mlBreakpoints = _ref6[1];
+
+    if (ml) {
+      cssProps.push(styled.css(["margin-left:", ";"], ml));
+    }
+
+    Object.keys(mlBreakpoints).forEach(function (breakpoint) {
+      cssProps.push(media.breakpoint.up(breakpoint, styled.css(["margin-left:", ";"], mlBreakpoints[breakpoint])));
+    });
+  }
+
+  if (props.mr) {
+    var _ref7 = Array.isArray(props.mr) ? props.mr : [props.mr, {}],
+        _ref8 = _slicedToArray(_ref7, 2),
+        mr = _ref8[0],
+        mrBreakpoints = _ref8[1];
+
+    if (mr) {
+      cssProps.push(styled.css(["margin-right:", ";"], mr));
+    }
+
+    Object.keys(mrBreakpoints).forEach(function (breakpoint) {
+      cssProps.push(media.breakpoint.up(breakpoint, styled.css(["margin-right:", ";"], mrBreakpoints[breakpoint])));
+    });
+  }
+
+  if (props.mt) {
+    var _ref9 = Array.isArray(props.mt) ? props.mt : [props.mt, {}],
+        _ref10 = _slicedToArray(_ref9, 2),
+        mt = _ref10[0],
+        mtBreakpoints = _ref10[1];
+
+    if (mt) {
+      cssProps.push(styled.css(["margin-top:", ";"], mt));
+    }
+
+    Object.keys(mtBreakpoints).forEach(function (breakpoint) {
+      cssProps.push(media.breakpoint.up(breakpoint, styled.css(["margin-top:", ";"], mtBreakpoints[breakpoint])));
+    });
+  }
+
+  if (props.mx) {
+    var _ref11 = Array.isArray(props.mx) ? props.mx : [props.mx, {}],
+        _ref12 = _slicedToArray(_ref11, 2),
+        mx = _ref12[0],
+        mxBreakpoints = _ref12[1];
+
+    if (mx) {
+      cssProps.push(styled.css(["margin-left:", ";margin-right:", ";"], mx, mx));
+    }
+
+    Object.keys(mxBreakpoints).forEach(function (breakpoint) {
+      cssProps.push(media.breakpoint.up(breakpoint, styled.css(["margin-left:", ";margin-right:", ";"], mxBreakpoints[breakpoint], mxBreakpoints[breakpoint])));
+    });
   }
 
   if (props.my) {
-    if (Array.isArray(props.my)) {
-      var _props$my = _slicedToArray(props.my, 2),
-          my = _props$my[0],
-          _breakpoints2 = _props$my[1];
+    var _ref13 = Array.isArray(props.my) ? props.my : [props.my, {}],
+        _ref14 = _slicedToArray(_ref13, 2),
+        my = _ref14[0],
+        myBreakpoints = _ref14[1];
 
+    if (my) {
       cssProps.push(styled.css(["margin-bottom:", ";margin-top:", ";"], my, my));
-      Object.keys(_breakpoints2).forEach(function (breakpoint) {
-        cssProps.push(media.breakpoint.up(breakpoint, styled.css(["margin-bottom:", ";margin-top:", ";"], _breakpoints2[breakpoint], _breakpoints2[breakpoint])));
-      });
-    } else {
-      cssProps.push(styled.css(["margin-bottom:", ";margin-top:", ";"], props.my, props.my));
     }
+
+    Object.keys(myBreakpoints).forEach(function (breakpoint) {
+      cssProps.push(media.breakpoint.up(breakpoint, styled.css(["margin-bottom:", ";margin-top:", ";"], myBreakpoints[breakpoint], myBreakpoints[breakpoint])));
+    });
+  }
+
+  if (props.p) {
+    var _ref15 = Array.isArray(props.p) ? props.p : [props.p, {}],
+        _ref16 = _slicedToArray(_ref15, 2),
+        p = _ref16[0],
+        pBreakpoints = _ref16[1];
+
+    if (p) {
+      cssProps.push(styled.css(["padding:", ";"], p));
+    }
+
+    Object.keys(pBreakpoints).forEach(function (breakpoint) {
+      cssProps.push(media.breakpoint.up(breakpoint, styled.css(["padding:", ";"], pBreakpoints[breakpoint])));
+    });
+  }
+
+  if (props.pb) {
+    var _ref17 = Array.isArray(props.pb) ? props.pb : [props.pb, {}],
+        _ref18 = _slicedToArray(_ref17, 2),
+        pb = _ref18[0],
+        pbBreakpoints = _ref18[1];
+
+    if (pb) {
+      cssProps.push(styled.css(["padding-bottom:", ";"], pb));
+    }
+
+    Object.keys(pbBreakpoints).forEach(function (breakpoint) {
+      cssProps.push(media.breakpoint.up(breakpoint, styled.css(["padding-bottom:", ";"], pbBreakpoints[breakpoint])));
+    });
+  }
+
+  if (props.pl) {
+    var _ref19 = Array.isArray(props.pl) ? props.pl : [props.pl, {}],
+        _ref20 = _slicedToArray(_ref19, 2),
+        pl = _ref20[0],
+        plBreakpoints = _ref20[1];
+
+    if (pl) {
+      cssProps.push(styled.css(["padding-left:", ";"], pl));
+    }
+
+    Object.keys(plBreakpoints).forEach(function (breakpoint) {
+      cssProps.push(media.breakpoint.up(breakpoint, styled.css(["padding-left:", ";"], plBreakpoints[breakpoint])));
+    });
+  }
+
+  if (props.pr) {
+    var _ref21 = Array.isArray(props.pr) ? props.pr : [props.pr, {}],
+        _ref22 = _slicedToArray(_ref21, 2),
+        pr = _ref22[0],
+        prBreakpoints = _ref22[1];
+
+    if (pr) {
+      cssProps.push(styled.css(["padding-right:", ";"], pr));
+    }
+
+    Object.keys(prBreakpoints).forEach(function (breakpoint) {
+      cssProps.push(media.breakpoint.up(breakpoint, styled.css(["padding-right:", ";"], prBreakpoints[breakpoint])));
+    });
+  }
+
+  if (props.pt) {
+    var _ref23 = Array.isArray(props.pt) ? props.pt : [props.pt, {}],
+        _ref24 = _slicedToArray(_ref23, 2),
+        pt = _ref24[0],
+        ptBreakpoints = _ref24[1];
+
+    if (pt) {
+      cssProps.push(styled.css(["padding-top:", ";"], pt));
+    }
+
+    Object.keys(ptBreakpoints).forEach(function (breakpoint) {
+      cssProps.push(media.breakpoint.up(breakpoint, styled.css(["padding-top:", ";"], ptBreakpoints[breakpoint])));
+    });
+  }
+
+  if (props.px) {
+    var _ref25 = Array.isArray(props.px) ? props.px : [props.px, {}],
+        _ref26 = _slicedToArray(_ref25, 2),
+        px = _ref26[0],
+        pxBreakpoints = _ref26[1];
+
+    if (px) {
+      cssProps.push(styled.css(["padding-left:", ";padding-right:", ";"], px, px));
+    }
+
+    Object.keys(pxBreakpoints).forEach(function (breakpoint) {
+      cssProps.push(media.breakpoint.up(breakpoint, styled.css(["padding-left:", ";padding-right:", ";"], pxBreakpoints[breakpoint], pxBreakpoints[breakpoint])));
+    });
   }
 
   if (props.py) {
-    if (Array.isArray(props.py)) {
-      var _props$py = _slicedToArray(props.py, 2),
-          py = _props$py[0],
-          _breakpoints3 = _props$py[1];
+    var _ref27 = Array.isArray(props.py) ? props.py : [props.py, {}],
+        _ref28 = _slicedToArray(_ref27, 2),
+        py = _ref28[0],
+        pyBreakpoints = _ref28[1];
 
+    if (py) {
       cssProps.push(styled.css(["padding-bottom:", ";padding-top:", ";"], py, py));
-      Object.keys(_breakpoints3).forEach(function (breakpoint) {
-        cssProps.push(media.breakpoint.up(breakpoint, styled.css(["padding-bottom:", ";padding-top:", ";"], _breakpoints3[breakpoint], _breakpoints3[breakpoint])));
-      });
-    } else {
-      cssProps.push(styled.css(["padding-bottom:", ";padding-top:", ";"], props.py, props.py));
     }
+
+    Object.keys(pyBreakpoints).forEach(function (breakpoint) {
+      cssProps.push(media.breakpoint.up(breakpoint, styled.css(["padding-bottom:", ";padding-top:", ";"], pyBreakpoints[breakpoint], pyBreakpoints[breakpoint])));
+    });
   }
 
   return cssProps;
