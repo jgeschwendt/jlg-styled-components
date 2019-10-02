@@ -122,7 +122,7 @@ const example04 = () => (
   </Container>
 )
 
-export default { title: 'Layout/Grid' };
+export default { title: 'Grid' };
 export {
   example01,
   example02,
