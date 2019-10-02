@@ -244,4 +244,4 @@ export const Spacer = styled.div<SpacerProps>`
     }
     return cssProps;
   }}
-`
+`;

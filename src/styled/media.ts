@@ -1,7 +1,7 @@
-import { css, FlattenInterpolation } from "styled-components";
-import { Theme } from "../Provider";
+import { css, FlattenInterpolation } from 'styled-components';
+import { Theme } from '../Provider';
 
-type MediaBreakpointEnum = keyof typeof Theme["breakpoints"];
+type MediaBreakpointEnum = keyof typeof Theme['breakpoints'];
 
 export const media = {
   breakpoint: {
@@ -24,7 +24,7 @@ export const media = {
           ${rules}
         }
       `;
-    }
+    },
   },
   print: (
     rules: FlattenInterpolation<any>
@@ -32,5 +32,5 @@ export const media = {
     @media print {
       ${rules}
     }
-  `
+  `,
 };

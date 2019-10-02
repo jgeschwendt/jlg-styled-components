@@ -28,7 +28,7 @@ const StyledRow = styled.div<RowProps>`
       cssProps.push(css`
         margin-left: -0.5rem;
         margin-right: -0.5rem;
-      `)
+      `);
     }
 
     if (typeof props.justify === 'string') {
@@ -45,4 +45,4 @@ export const Row = ({ children, gutter, ...props }: RowProps) => (
     { gutter, ...props } as RowProps,
     Children.map(children, (child) => cloneElement(child, { gutter }))
   )
-)
+);

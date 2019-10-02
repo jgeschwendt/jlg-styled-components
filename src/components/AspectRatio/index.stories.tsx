@@ -32,5 +32,5 @@ const example01 = () => (
 export default { title: 'AspectRatio' };
 export {
   example01,
-}
+};
 

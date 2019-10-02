@@ -40,7 +40,7 @@ export const Col = styled.div<ColProps>`
       cssProps.push(css`
         padding-left: .5rem;
         padding-right: .5rem;
-      `)
+      `);
     }
 
     if (props.xs) {
@@ -59,52 +59,52 @@ export const Col = styled.div<ColProps>`
       cssProps.push(media.breakpoint.up('sm', css`
         flex: 0 0 ${props.sm * 100}%;
         max-width: ${props.sm * 100}%;
-      `))
+      `));
     }
 
     if (props.md) {
       cssProps.push(media.breakpoint.up('md', css`
         flex: 0 0 ${props.md * 100}%;
         max-width: ${props.md * 100}%;
-      `))
+      `));
     }
 
     if (props.lg) {
       cssProps.push(media.breakpoint.up('lg', css`
         flex: 0 0 ${props.lg * 100}%;
         max-width: ${props.lg * 100}%;
-      `))
+      `));
     }
 
     if (props.xl) {
       cssProps.push(media.breakpoint.up('xl', css`
         flex: 0 0 ${props.xl * 100}%;
         max-width: ${props.xl * 100}%;
-      `))
+      `));
     }
 
     if (props.smOffset) {
       cssProps.push(media.breakpoint.up('sm', css`
         margin-left: ${props.smOffset * 100}%;
-      `))
+      `));
     }
 
     if (props.mdOffset) {
       cssProps.push(media.breakpoint.up('md', css`
         margin-left: ${props.mdOffset * 100}%;
-      `))
+      `));
     }
 
     if (props.lgOffset) {
       cssProps.push(media.breakpoint.up('lg', css`
         margin-left: ${props.lgOffset * 100}%;
-      `))
+      `));
     }
 
     if (props.xlOffset) {
       cssProps.push(media.breakpoint.up('xl', css`
         margin-left: ${props.xlOffset * 100}%;
-      `))
+      `));
     }
 
     return cssProps;

@@ -32,5 +32,5 @@ const example01 = () => (
 export default { title: 'Spacer' };
 export {
   example01,
-}
+};
 
