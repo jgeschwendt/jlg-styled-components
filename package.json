@@ -48,6 +48,7 @@
     "build": "rollup -c",
     "c": "npm-check-updates",
     "cu": "npm-check-updates -u",
+    "docs": "build-storybook -o docs",
     "start": "start-storybook",
     "test": "jest"
   }
