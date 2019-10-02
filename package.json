@@ -1,0 +1,53 @@
+{
+  "name": "@jlg/styled-components",
+  "version": "0.1.0",
+  "description": "Reusable structural Styled Components and tooling",
+  "keywords": [],
+  "main": "dist/styled-components.cjs.js",
+  "module": "dist/styled-components.esm.js",
+  "browser": {
+    "./dist/styled-components.cjs.js": "./dist/styled-components.browser.cjs.js",
+    "./dist/styled-components.esm.js": "./dist/styled-components.browser.esm.js"
+  },
+  "sideEffects": false,
+  "dependencies": {},
+  "devDependencies": {
+    "@babel/core": "7.6.2",
+    "@babel/preset-env": "7.6.2",
+    "@babel/preset-react": "7.0.0",
+    "@babel/preset-typescript": "7.6.0",
+    "@storybook/addon-actions": "5.2.1",
+    "@storybook/addon-links": "5.2.1",
+    "@storybook/addons": "5.2.1",
+    "@storybook/react": "5.2.1",
+    "@types/react": "16.9.4",
+    "@types/react-dom": "16.9.1",
+    "@types/styled-components": "4.1.19",
+    "babel-loader": "8.0.6",
+    "babel-plugin-module-resolver": "3.2.0",
+    "babel-plugin-styled-components": "1.10.6",
+    "npm-check-updates": "3.1.23",
+    "react": "16.10.1",
+    "react-dom": "16.10.1",
+    "rollup-plugin-babel": "4.3.3",
+    "rollup-plugin-commonjs": "10.1.0",
+    "rollup-plugin-node-resolve": "5.2.0",
+    "rollup": "1.22.0",
+    "styled-components": "4.4.0",
+    "styled-reboot": "4.0.3",
+    "typescript": "3.6.3"
+  },
+  "peerDependencies": {
+    "react": "^16.10.1",
+    "react-dom": "^16.10.1",
+    "styled-components": "^4.4.0",
+    "styled-reboot": "^4.0.3"
+  },
+  "scripts": {
+    "build": "rollup -c",
+    "c": "npm-check-updates",
+    "cu": "npm-check-updates -u",
+    "start": "start-storybook",
+    "test": "jest"
+  }
+}
