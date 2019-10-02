@@ -3,13 +3,14 @@
   "version": "0.1.0",
   "description": "Reusable structural Styled Components and tooling",
   "keywords": [],
-  "main": "dist/styled-components.cjs.js",
-  "module": "dist/styled-components.esm.js",
   "browser": {
     "./dist/styled-components.cjs.js": "./dist/styled-components.browser.cjs.js",
     "./dist/styled-components.esm.js": "./dist/styled-components.browser.esm.js"
   },
+  "main": "dist/styled-components.cjs.js",
+  "module": "dist/styled-components.esm.js",
   "sideEffects": false,
+  "types": "src/index.ts",
   "dependencies": {},
   "devDependencies": {
     "@babel/core": "7.6.2",
