@@ -1,5 +1,5 @@
+import media from '@jlg/styled-media';
 import styled, { css } from 'styled-components';
-import { media } from '../../styled';
 
 interface SpacerBreakpoints {
   sm?: string;

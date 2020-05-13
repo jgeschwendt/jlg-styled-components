@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import React, { createElement, Children, cloneElement } from 'react';
+import { createElement, Children, cloneElement } from 'react';
 
 function _defineProperty(obj, key, value) {
   if (key in obj) {
@@ -35,13 +35,13 @@ function _objectSpread2(target) {
     var source = arguments[i] != null ? arguments[i] : {};
 
     if (i % 2) {
-      ownKeys(source, true).forEach(function (key) {
+      ownKeys(Object(source), true).forEach(function (key) {
         _defineProperty(target, key, source[key]);
       });
     } else if (Object.getOwnPropertyDescriptors) {
       Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
     } else {
-      ownKeys(source).forEach(function (key) {
+      ownKeys(Object(source)).forEach(function (key) {
         Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
       });
     }
@@ -99,7 +99,7 @@ function _taggedTemplateLiteral(strings, raw) {
 }
 
 function _slicedToArray(arr, i) {
-  return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest();
+  return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();
 }
 
 function _arrayWithHoles(arr) {
@@ -107,10 +107,7 @@ function _arrayWithHoles(arr) {
 }
 
 function _iterableToArrayLimit(arr, i) {
-  if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) {
-    return;
-  }
-
+  if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return;
   var _arr = [];
   var _n = true;
   var _d = false;
@@ -136,53 +133,61 @@ function _iterableToArrayLimit(arr, i) {
   return _arr;
 }
 
-function _nonIterableRest() {
-  throw new TypeError("Invalid attempt to destructure non-iterable instance");
+function _unsupportedIterableToArray(o, minLen) {
+  if (!o) return;
+  if (typeof o === "string") return _arrayLikeToArray(o, minLen);
+  var n = Object.prototype.toString.call(o).slice(8, -1);
+  if (n === "Object" && o.constructor) n = o.constructor.name;
+  if (n === "Map" || n === "Set") return Array.from(o);
+  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
 }
 
-var Theme = {
-  breakpoints: {
-    sm: 576,
-    md: 768,
-    lg: 992,
-    xl: 1200
-  },
-  colors: {
-    red: 'red'
+function _arrayLikeToArray(arr, len) {
+  if (len == null || len > arr.length) len = arr.length;
+
+  for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
+
+  return arr2;
+}
+
+function _nonIterableRest() {
+  throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+
+function _taggedTemplateLiteral$1(strings, raw) {
+  if (!raw) {
+    raw = strings.slice(0);
   }
-};
-var ThemeContext = React.createContext(void 0);
 
-var ThemeProvider = function ThemeProvider(_ref) {
-  var children = _ref.children,
-      theme = _ref.theme;
-
-  var _React$useState = React.useState(_objectSpread2({}, Theme, {}, theme)),
-      _React$useState2 = _slicedToArray(_React$useState, 2),
-      state = _React$useState2[0],
-      setState = _React$useState2[1];
-
-  return React.createElement(ThemeContext.Provider, {
-    value: [state, setState]
-  }, children);
-};
-
-var media = {
-  breakpoint: {
-    down: function down(media, rules) {
-      return css(["@media (max-width:", "px){", "}"], Theme.breakpoints[media] - 0.02, rules);
-    },
-    up: function up(media, rules) {
-      return css(["@media (min-width:", "px){", "}"], Theme.breakpoints[media], rules);
+  return Object.freeze(Object.defineProperties(strings, {
+    raw: {
+      value: Object.freeze(raw)
     }
-  },
-  print: function print(rules) {
-    return css(["@media print{", "}"], rules);
-  }
-};
+  }));
+}
+
+function _templateObject3() {
+  var data = _taggedTemplateLiteral$1(["\n      @media print {\n        ", "\n      }\n    "]);
+
+  _templateObject3 = function _templateObject3() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject2() {
+  var data = _taggedTemplateLiteral$1(["\n        @media (min-width: ", "px) {\n          ", "\n        }\n      "]);
+
+  _templateObject2 = function _templateObject2() {
+    return data;
+  };
+
+  return data;
+}
 
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n  box-sizing: border-box;\n  min-height: 1px;\n  padding-left: 0.5rem;\n  padding-right: 0.5rem;\n  position: relative;\n  width: 100%;\n\n  ", "\n"]);
+  var data = _taggedTemplateLiteral$1(["\n        @media (max-width: ", "px) {\n          ", "\n        }\n      "]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -190,7 +195,34 @@ function _templateObject() {
 
   return data;
 }
-var Col = styled.div(_templateObject(), function (props) {
+
+var media = {
+  breakpoint: {
+    down: function down(breakpoint, breakpointCss) {
+      return css(_templateObject(), breakpoint - 0.02, breakpointCss);
+    },
+    up: function up(breakpoint, breakpointCss) {
+      console.log('-', breakpoint, breakpointCss);
+      return css(_templateObject2(), function (props) {
+        return props.theme.breakpoints[breakpoint];
+      }, breakpointCss);
+    }
+  },
+  print: function print(printCss) {
+    return css(_templateObject3(), printCss);
+  }
+};
+
+function _templateObject$1() {
+  var data = _taggedTemplateLiteral(["\n  box-sizing: border-box;\n  min-height: 1px;\n  padding-left: 0.5rem;\n  padding-right: 0.5rem;\n  position: relative;\n  width: 100%;\n\n  ", "\n"]);
+
+  _templateObject$1 = function _templateObject() {
+    return data;
+  };
+
+  return data;
+}
+var Col = styled.div(_templateObject$1(), function (props) {
   var cssProps = [];
 
   if (props.gutter) {
@@ -199,57 +231,66 @@ var Col = styled.div(_templateObject(), function (props) {
     cssProps.push(css(["padding-left:.5rem;padding-right:.5rem;"]));
   }
 
-  if (props.xs) {
-    cssProps.push(css(["flex:0 0 ", "%;max-width:", "%;"], props.xs * 100, props.xs * 100));
-  } else {
-    cssProps.push(css(["flex:0 0 100%;max-width:100%;"]));
+  var breakpoints = Object.keys(props.theme.breakpoints);
+
+  if (breakpoints.length === 0) {
+    throw Error('You need to set breakpoint keys on the theme provider.');
   }
 
-  if (props.sm) {
-    cssProps.push(media.breakpoint.up('sm', css(["flex:0 0 ", "%;max-width:", "%;"], props.sm * 100, props.sm * 100)));
-  }
+  breakpoints.map(function (breakpoint) {
+    if (props.hasOwnProperty(breakpoint)) {
+      var _ref = Array.isArray(props[breakpoint]) ? props[breakpoint] : [props[breakpoint], {}],
+          _ref2 = _slicedToArray(_ref, 2),
+          col = _ref2[0],
+          _ref2$ = _ref2[1],
+          offset = _ref2$.offset,
+          order = _ref2$.order;
 
-  if (props.md) {
-    cssProps.push(media.breakpoint.up('md', css(["flex:0 0 ", "%;max-width:", "%;"], props.md * 100, props.md * 100)));
-  }
+      if (props.theme.breakpoints[breakpoint] === 0) {
+        if (col !== 0) {
+          cssProps.push(css(["flex:0 0 ", "%;max-width:", "%;"], col * 100, col * 100));
+        } else {
+          cssProps.push(css(["flex:0 0 100%;max-width:100%;"]));
+        }
 
-  if (props.lg) {
-    cssProps.push(media.breakpoint.up('lg', css(["flex:0 0 ", "%;max-width:", "%;"], props.lg * 100, props.lg * 100)));
-  }
+        if (typeof offset === 'number') {
+          cssProps.push(css(["margin-left:", "%;"], offset * 100));
+        }
 
-  if (props.xl) {
-    cssProps.push(media.breakpoint.up('xl', css(["flex:0 0 ", "%;max-width:", "%;"], props.xl * 100, props.xl * 100)));
-  }
+        if (typeof order === 'number') {
+          cssProps.push(css(["order:", ";"], order));
+        }
+      } else {
+        cssProps.push(media.breakpoint.up(breakpoint, css(["flex:0 0 ", "%;max-width:", "%;"], col * 100, col * 100)));
 
-  if (props.smOffset) {
-    cssProps.push(media.breakpoint.up('sm', css(["margin-left:", "%;"], props.smOffset * 100)));
-  }
+        if (typeof offset === 'number') {
+          cssProps.push(media.breakpoint.up(breakpoint, css(["margin-left:", "%;"], offset * 100)));
+        }
 
-  if (props.mdOffset) {
-    cssProps.push(media.breakpoint.up('md', css(["margin-left:", "%;"], props.mdOffset * 100)));
-  }
+        if (typeof order === 'number') {
+          cssProps.push(media.breakpoint.up(breakpoint, css(["order:", ";"], order)));
+        }
+      }
+    }
+  });
 
-  if (props.lgOffset) {
-    cssProps.push(media.breakpoint.up('lg', css(["margin-left:", "%;"], props.lgOffset * 100)));
-  }
-
-  if (props.xlOffset) {
-    cssProps.push(media.breakpoint.up('xl', css(["margin-left:", "%;"], props.xlOffset * 100)));
+  if (props.withCSS) {
+    cssProps.push(props.withCSS);
   }
 
   return cssProps;
 });
 
-function _templateObject$1() {
+function _templateObject$2() {
   var data = _taggedTemplateLiteral(["\n  margin-left: auto;\n  margin-right: auto;\n  padding-left: .5rem;\n  padding-right: .5rem;\n  width: 100%;\n\n  ", "\n"]);
 
-  _templateObject$1 = function _templateObject() {
+  _templateObject$2 = function _templateObject() {
     return data;
   };
 
   return data;
 }
-var Container = styled.div(_templateObject$1(), function (props) {
+var Container = styled.div(_templateObject$2(), function (props) {
   var cssProps = [];
 
   if (props.maxWidth) {
@@ -259,16 +300,16 @@ var Container = styled.div(_templateObject$1(), function (props) {
   return cssProps;
 });
 
-function _templateObject$2() {
+function _templateObject$3() {
   var data = _taggedTemplateLiteral(["\n  box-sizing: border-box;\n  display: flex;\n  flex-direction: row;\n  flex-wrap: wrap;\n\n  ", "\n"]);
 
-  _templateObject$2 = function _templateObject() {
+  _templateObject$3 = function _templateObject() {
     return data;
   };
 
   return data;
 }
-var StyledRow = styled.div(_templateObject$2(), function (props) {
+var StyledRow = styled.div(_templateObject$3(), function (props) {
   var cssProps = [];
 
   if (props.gutter) {
@@ -281,6 +322,12 @@ var StyledRow = styled.div(_templateObject$2(), function (props) {
     cssProps.push(css(["justify-content:", ";"], props.justify));
   }
 
+  console.log('bingo', props);
+
+  if (props.withCSS) {
+    cssProps.push(props.withCSS);
+  }
+
   return cssProps;
 });
 var Row = function Row(_ref) {
@@ -291,22 +338,22 @@ var Row = function Row(_ref) {
   return createElement(StyledRow, _objectSpread2({
     gutter: gutter
   }, props), Children.map(children, function (child) {
-    return cloneElement(child, {
+    return cloneElement(child, _objectSpread2({
       gutter: gutter
-    });
+    }, props));
   }));
 };
 
-function _templateObject$3() {
+function _templateObject$4() {
   var data = _taggedTemplateLiteral(["\n  ", "\n"]);
 
-  _templateObject$3 = function _templateObject() {
+  _templateObject$4 = function _templateObject() {
     return data;
   };
 
   return data;
 }
-var Spacer = styled.div(_templateObject$3(), function (props) {
+var Spacer = styled.div(_templateObject$4(), function (props) {
   var cssProps = [];
 
   if (props.m) {
@@ -522,4 +569,4 @@ var Spacer = styled.div(_templateObject$3(), function (props) {
   return cssProps;
 });
 
-export { Col, Container, Row, Spacer, ThemeProvider, media };
+export { Col, Container, Row, Spacer };

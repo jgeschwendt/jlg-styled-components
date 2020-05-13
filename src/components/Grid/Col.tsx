@@ -1,24 +1,20 @@
-import styled, { css } from 'styled-components';
-import { media } from '../../styled';
+import media from '@jlg/styled-media';
+import styled, { css, DefaultTheme, FlattenSimpleInterpolation } from 'styled-components';
 
-interface Media {
-  xs?: number;
-  xsOffset?: number;
-  sm?: number;
-  smOffset?: number;
-  md?: number;
-  mdOffset?: number;
-  lg?: number;
-  lgOffset?: number;
-  xl?: number;
-  xlOffset?: number;
-}
 
-interface ColProps extends Media {
-  children?: Element | Element[] | any;
-  className?: string | null;
+type Breakpoint = keyof DefaultTheme['breakpoints'];
+
+type ColOptions = {
+  offset?: number;
+  order?: number;
+};
+
+type ColProps = {
+  [breakpoint in Breakpoint]?: number | [number, ColOptions];
+} & {
   gutter?: string;
-}
+  withCSS?: FlattenSimpleInterpolation | FlattenSimpleInterpolation[];
+};
 
 export const Col = styled.div<ColProps>`
   box-sizing: border-box;
@@ -29,7 +25,7 @@ export const Col = styled.div<ColProps>`
   width: 100%;
 
   ${(props) => {
-    const cssProps = [];
+    const cssProps: FlattenSimpleInterpolation[] = [];
 
     if (props.gutter) {
       cssProps.push(css`
@@ -43,68 +39,58 @@ export const Col = styled.div<ColProps>`
       `);
     }
 
-    if (props.xs) {
-      cssProps.push(css`
-        flex: 0 0 ${props.xs * 100}%;
-        max-width: ${props.xs * 100}%;
-      `);
-    } else {
-      cssProps.push(css`
-        flex: 0 0 100%;
-        max-width: 100%;
-      `);
+    const breakpoints = Object.keys(props.theme.breakpoints);
+
+    if (breakpoints.length === 0) {
+      throw Error('You need to set breakpoint keys on the theme provider.')
     }
 
-    if (props.sm) {
-      cssProps.push(media.breakpoint.up('sm', css`
-        flex: 0 0 ${props.sm * 100}%;
-        max-width: ${props.sm * 100}%;
-      `));
-    }
+    breakpoints.map((breakpoint) => {
+      if (props.hasOwnProperty(breakpoint)) {
+        const [col, { offset, order }] = (
+          Array.isArray(props[breakpoint]) ? props[breakpoint] : [props[breakpoint], {}]
+        ) as [number, ColOptions];
 
-    if (props.md) {
-      cssProps.push(media.breakpoint.up('md', css`
-        flex: 0 0 ${props.md * 100}%;
-        max-width: ${props.md * 100}%;
-      `));
-    }
+        if (props.theme.breakpoints[breakpoint] === 0) {
+          if (col !== 0) {
+            cssProps.push(css`
+              flex: 0 0 ${col * 100}%;
+              max-width: ${col * 100}%;
+            `);
+          } else {
+            cssProps.push(css`
+              flex: 0 0 100%;
+              max-width: 100%;
+            `);
+          }
 
-    if (props.lg) {
-      cssProps.push(media.breakpoint.up('lg', css`
-        flex: 0 0 ${props.lg * 100}%;
-        max-width: ${props.lg * 100}%;
-      `));
-    }
+          if (typeof offset === 'number') {
+            cssProps.push(css`margin-left: ${offset * 100}%;`);
+          }
 
-    if (props.xl) {
-      cssProps.push(media.breakpoint.up('xl', css`
-        flex: 0 0 ${props.xl * 100}%;
-        max-width: ${props.xl * 100}%;
-      `));
-    }
+          if (typeof order === 'number') {
+            cssProps.push(css`order: ${order};`);
+          }
 
-    if (props.smOffset) {
-      cssProps.push(media.breakpoint.up('sm', css`
-        margin-left: ${props.smOffset * 100}%;
-      `));
-    }
+        } else {
+          cssProps.push(media.breakpoint.up(breakpoint, css`
+            flex: 0 0 ${col * 100}%;
+            max-width: ${col * 100}%;
+          `) as any);
 
-    if (props.mdOffset) {
-      cssProps.push(media.breakpoint.up('md', css`
-        margin-left: ${props.mdOffset * 100}%;
-      `));
-    }
+          if (typeof offset === 'number') {
+            cssProps.push(media.breakpoint.up(breakpoint, css`margin-left: ${offset * 100}%;`) as any);
+          }
 
-    if (props.lgOffset) {
-      cssProps.push(media.breakpoint.up('lg', css`
-        margin-left: ${props.lgOffset * 100}%;
-      `));
-    }
+          if (typeof order === 'number') {
+            cssProps.push(media.breakpoint.up(breakpoint, css`order: ${order};`) as any);
+          }
+        }
+      }
+    });
 
-    if (props.xlOffset) {
-      cssProps.push(media.breakpoint.up('xl', css`
-        margin-left: ${props.xlOffset * 100}%;
-      `));
+    if (props.withCSS) {
+      cssProps.push(props.withCSS);
     }
 
     return cssProps;

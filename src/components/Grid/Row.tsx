@@ -8,6 +8,7 @@ interface RowProps {
   children: Element | Element[] | any;
   gutter?: string;
   justify?: JustifyContentProps;
+  withCSS?: any;
 }
 
 const StyledRow = styled.div<RowProps>`
@@ -35,6 +36,11 @@ const StyledRow = styled.div<RowProps>`
       cssProps.push(css`justify-content: ${props.justify};`);
     }
 
+    console.log('bingo', props)
+    if (props.withCSS) {
+      cssProps.push(props.withCSS);
+    }
+
     return cssProps;
   }}
 `;
@@ -43,6 +49,6 @@ export const Row = ({ children, gutter, ...props }: RowProps) => (
   createElement(
     StyledRow,
     { gutter, ...props } as RowProps,
-    Children.map(children, (child) => cloneElement(child, { gutter }))
+    Children.map(children, (child) => cloneElement(child, { gutter, ...props }))
   )
 );
